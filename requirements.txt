@@ -1,0 +1,4 @@
+humblebundle
+Flask
+beautifulsoup4
+Tornado

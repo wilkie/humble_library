@@ -1,0 +1,176 @@
+body {
+  background-color: hsl(120, 30%, 10%);
+  background: url('/static/images/noise_black.png');
+  padding-bottom: 20px;
+}
+
+body a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body ul.games {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+body ul.games li.game {
+  display: block;
+  padding-bottom: 10px;
+  position: relative;
+  background-color: hsl(120, 30%, 40%);
+  margin-top: 50px;
+}
+
+body ul.games li.game h1 {
+  color: white;
+  display: block;
+  position: relative;
+  font-family: "Marcellus SC", serif;
+  background-color: hsl(120, 30%, 60%);
+  vertical-align: bottom;
+  line-height: 40px;
+  font-size: 20px;
+  padding: 5px 10px;
+  margin-left: 10px;
+  top: -20px;
+  height: 30px;
+}
+
+body ul.games li.game ul.platforms {
+  position: absolute;
+  right: 85px;
+  top: -13px;
+}
+
+body ul.games li.game ul.platforms li.platform {
+  display: inline-block;
+  width:  30px;
+  height: 30px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+body ul.games li.game ul.platforms li.platform a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+
+body ul.games li.game ul.platforms li.platform.windows {
+  background-image: url('/static/images/windows_gray.svg');
+}
+
+body ul.games li.game ul.platforms li.platform.windows:hover {
+  background-image: url('/static/images/windows.svg');
+}
+
+body ul.games li.game ul.platforms li.platform.mac {
+  background-image: url('/static/images/osx_gray.svg');
+}
+
+body ul.games li.game ul.platforms li.platform.mac:hover {
+  background-image: url('/static/images/osx.svg');
+}
+
+body ul.games li.game ul.platforms li.platform.linux {
+  background-image: url('/static/images/linux_gray.svg');
+}
+
+body ul.games li.game ul.platforms li.platform.linux:hover {
+  background-image: url('/static/images/linux.svg');
+}
+
+body ul.games li.game img.icon {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  right: 5px;
+  top: -35px;
+}
+
+body ul.games li.game .description {
+  display: block;
+  line-height: 1.2em;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 200;
+  color: white;
+  padding: 0px 20px;
+  padding-bottom: 15px;
+}
+
+body ul.games li.game .description h2 {
+  clear: both;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+body ul.games li.game .description ul {
+  clear: both;
+  padding-left: 20px;
+  list-style-type: square;
+  list-style-position: outside;
+}
+
+body ul.games li.game .description ul li {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+body ul.games li.game .description b,
+body ul.games li.game .description strong {
+  font-weight: 700;
+}
+
+body ul.games li.game .description i,
+body ul.games li.game .description em {
+  font-style: italic;
+}
+
+body ul.games li.game .description i,
+body ul.games li.game .description em {
+  font-style: italic;
+}
+
+body ul.games li.game > img.screen {
+  position: relative;
+  left: -20px;
+  top: -10px;
+  float: left;
+  width: 400px;
+  border: 2px solid hsl(120, 30%, 30%);
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+body ul.games li.game .screenshot_track {
+  clear: both;
+  margin-left: 10px;
+}
+
+body ul.games li.game ul.screenshots li {
+  display: inline-block;
+  height: 65px;
+}
+
+body ul.games li.game ul.tags {
+  padding: 0px 10px;
+  margin-top: 5px;
+}
+
+body ul.games li.game ul.tags li.tag {
+  background-color: hsl(160, 50%, 80%);
+  border-radius: 10px;
+
+  color: hsl(160, 50%, 15%);
+
+  display: inline-block;
+
+  font-family: "Marcellus SC", sans-serif;
+  font-size: 13px;
+
+  padding: 3px 6px;
+  margin-top: 5px;
+
