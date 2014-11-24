@@ -2,6 +2,10 @@ import json
 import urllib.request
 import os.path
 
+# Create icon path
+if not os.path.exists("static/icons"):
+  os.mkdir("static/icons")
+
 # Load games
 games_by_title = json.load(open("data/humble_list.json"))
 
