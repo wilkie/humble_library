@@ -44,6 +44,7 @@ def load_games():
         game_name = game_name.strip()
         if not game_name in games_by_title:
           data = {
+            "order": gamekey,
             "url": (subproduct.url or "").strip(),
             "name": (subproduct.human_name or "").strip(),
             "id": (subproduct.machine_name or "").strip(),
