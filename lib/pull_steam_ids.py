@@ -11,6 +11,10 @@ STEAM_GAME_URL = "http://store.steampowered.com/app/"
 STEAM_TAG_SELECTOR = "div.popular_tags a.app_tag"
 STEAM_AGECHECK_URL = "http://store.steampowered.com/agecheck/app/"
 
+# Create screens path
+if not os.path.exists("static/screens"):
+  os.mkdir("static/screens")
+
 # Load games
 games_by_title = json.load(open("data/humble_list.json"))
 games = list(games_by_title.keys())
