@@ -59,12 +59,22 @@ for game in pc_games:
   # Look at the closest search result
   results = soup.find(id="search_result_container")
   if results is None:
-    print("Cannot find %s on Steam" % (game))
+    try:
+      print("Cannot find %s on Steam" % (game))
+    except:
+      # Argh. Sometimes it hates the encoding when it tries to print on
+      # some terminals. Freaking python.
+      print("Cannot find %s on Steam" % (game.encode('ascii', 'ignore').decode('ascii')))
     continue
 
   links = results.find_all('a', class_="search_result_row")
   if links is None:
-    print("Cannot find %s on Steam" % (game))
+    try:
+      print("Cannot find %s on Steam" % (game))
+    except:
+      # Argh. Sometimes it hates the encoding when it tries to print on
+      # some terminals. Freaking python.
+      print("Cannot find %s on Steam" % (game.encode('ascii', 'ignore').decode('ascii')))
     continue
 
   result_rows = [{"name":  result.find('span', class_="title").get_text().strip(),
@@ -86,9 +96,12 @@ for game in pc_games:
         best_score = score
 
   if best_row is None:
-    print("Cannot find %s on Steam" % (game))
-    print(result_rows)
-    print("")
+    try:
+      print("Cannot find %s on Steam" % (game))
+    except:
+      # Argh. Sometimes it hates the encoding when it tries to print on
+      # some terminals. Freaking python.
+      print("Cannot find %s on Steam" % (game.encode('ascii', 'ignore').decode('ascii')))
     continue
 
   appid = best_row["appid"]
@@ -117,7 +130,12 @@ for game in pc_games:
     soup = BeautifulSoup(opener.open(birthday_post_url, urllib.parse.urlencode({"ageDay": "1", "ageMonth": "January", "ageYear": "1970", "snr": snr}).encode('ascii')))
 
   steam_info_by_title[game]["name"] = name
-  print("Steam Name: %s" % (name))
+  try:
+    print("Steam Name: %s" % (name))
+  except:
+    # Argh. Sometimes it hates the encoding when it tries to print on
+    # some terminals. Freaking python.
+    print("Steam Name: %s" % (name.encode('ascii', 'ignore').decode('ascii')))
 
   # Pull out tags
   def is_tag(tag):
@@ -174,25 +192,45 @@ for game in pc_games:
     screen_url = "%s%s.600x338%s" % (screen_base_url, screen_id[:-len(screen_ext)], screen_ext)
 
     if not os.path.exists("static/screens/%s/%s" % (appid, filename)):
-      print("Pulling %s for %s" % (filename, game))
+      try:
+        print("Pulling %s for %s" % (filename, game))
+      except:
+        # Argh. Sometimes it hates the encoding when it tries to print on
+        # some terminals. Freaking python.
+        print("Pulling %s for %s" % (filename, game.encode('ascii', 'ignore').decode('ascii')))
       try:
         urllib.request.urlretrieve(screen_url, "static/screens/%s/%s" % (appid, filename))
         screen_info["screens"] = "%s/%s" % (appid, filename)
       except:
         print("404")
     else:
-      print("Exists: %s for %s" % (filename, game))
+      try:
+        print("Exists: %s for %s" % (filename, game))
+      except:
+        # Argh. Sometimes it hates the encoding when it tries to print on
+        # some terminals. Freaking python.
+        print("Exists: %s for %s" % (filename, game.encode('ascii', 'ignore').decode('ascii')))
       screen_info["screens"] = "%s/%s" % (appid, filename)
 
     if not os.path.exists("static/thumbs/%s/%s" % (appid, filename)):
-      print("Pulling %s for %s" % (filename, game))
+      try:
+        print("Pulling %s for %s" % (filename, game))
+      except:
+        # Argh. Sometimes it hates the encoding when it tries to print on
+        # some terminals. Freaking python.
+        print("Pulling %s for %s" % (filename, game.encode('ascii', 'ignore').decode('ascii')))
       try:
         urllib.request.urlretrieve(thumb_url, "static/thumbs/%s/%s" % (appid, filename))
         screen_info["thumb"] = "%s/%s" % (appid, filename)
       except:
         print("404")
     else:
-      print("Exists: %s for %s" % (filename, game))
+      try:
+        print("Exists: %s for %s" % (filename, game))
+      except:
+        # Argh. Sometimes it hates the encoding when it tries to print on
+        # some terminals. Freaking python.
+        print("Exists: %s for %s" % (filename, game.encode('ascii', 'ignore').decode('ascii')))
       screen_info["thumb"] = "%s/%s" % (appid, filename)
 
     steam_info_by_title[game]["screens"].append(screen_info)

@@ -18,7 +18,12 @@ for game, info in games_by_title.items():
 
   filename = url[url.rindex('/')+1:]
   if not os.path.exists("static/icons/%s" % (filename)):
-    print("Pulling %s for %s" % (filename, game))
+    try:
+      print("Pulling %s for %s" % (filename, game))
+    except:
+      # Argh. Sometimes it hates the encoding when it tries to print on
+      # some terminals. Freaking python.
+      print("Pulling %s for %s" % (filename, game.encode('ascii', 'ignore').decode('ascii')))
     try:
       urllib.request.urlretrieve(url, "static/icons/%s" % (filename))
       icons_by_title[game] = filename
