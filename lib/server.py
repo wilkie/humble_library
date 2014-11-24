@@ -2,6 +2,8 @@ import json
 from flask import Flask, request, redirect, url_for, \
                   abort, render_template, flash
 
+from humblebundle import HumbleApi
+
 # CONFIGURATION
 
 DEBUG = True
@@ -76,6 +78,33 @@ def tag_show(tag):
 @app.route("/games/<id>")
 def game_show(id):
   return 'Game %s' % id
+
+@app.route("/downloads/<gamekey>/<id>/<platform>")
+def download_game(gamekey, id, platform):
+  # Log on to HumbleBundle
+  client = HumbleApi()
+
+  # read config.yml
+  from yaml import load, dump
+  try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+  except ImportError:
+    from yaml import Loader, Dumper
+  config = load(open("config/config.yml", "r"))
+  username = config["humblebundle"]["username"]
+  password = config["humblebundle"]["password"]
+
+  client.login(username, password)
+
+  order = client.get_order(gamekey)
+  if not order is None and not order.subproducts is None:
+    for subproduct in order.subproducts:
+      if subproduct.machine_name == id:
+        # This game. Look through downloads for the right platform.
+        for download in subproduct.downloads:
+          if download.platform == platform:
+            return redirect(download.download_struct[0].url.web, code=302)
+  return 404
 
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
