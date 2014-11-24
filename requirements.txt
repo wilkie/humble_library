@@ -1,4 +1,5 @@
-humblebundle
+-e git://github.com/wilkie/humblebundle-python.git#egg=humblebundle
 Flask
 beautifulsoup4
 Tornado
+pyyaml

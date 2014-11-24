@@ -1,12 +1,31 @@
 import json
 import sys
+import os
 from humblebundle import HumbleApi
+
+# Create a data directory if it doesn't exist
+if not os.path.exists("./data"):
+  os.mkdir("./data")
 
 # Log on to HumbleBundle
 client = HumbleApi()
 
-# TODO: add config
-client.login(sys.argv[1], sys.argv[2])
+if len(sys.argv) >= 3:
+  username = sys.argv[1]
+  password = sys.argv[2]
+else:
+  # read config.yml
+  from yaml import load, dump
+  try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+  except ImportError:
+    from yaml import Loader, Dumper
+  config = load(open("config/config.yml", "r"))
+  username = config["humblebundle"]["username"]
+  password = config["humblebundle"]["password"]
+
+print("Logging in as %s" % (username))
+client.login(username, password)
 
 # Grab gamekeys
 gamekeys = client.get_gamekeys()
@@ -48,7 +67,12 @@ def load_games():
           if not len(data["downloads"]) == 0:
             games_by_title[game_name] = data
             games.append(data)
-            print(subproduct.human_name)
+            try:
+              print(subproduct.human_name)
+            except:
+              # Argh. Sometimes it hates the encoding when it tries to print on
+              # some terminals. Freaking python.
+              print(subproduct.human_name.encode('ascii', 'ignore').decode('ascii'))
 
 load_games()
 
