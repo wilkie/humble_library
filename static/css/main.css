@@ -83,7 +83,6 @@ body ul.games li.game ul.platforms li.platform.linux:hover {
 
 body ul.games li.game img.icon {
   position: absolute;
-  width: 70px;
   height: 70px;
   right: 5px;
   top: -35px;
@@ -152,6 +151,10 @@ body ul.games li.game .screenshot_track {
 
 body ul.games li.game ul.screenshots li {
   display: inline-block;
+  height: 65px;
+}
+
+body ul.games li.game ul.screenshots li img {
   height: 65px;
 }
 

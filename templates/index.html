@@ -7,33 +7,39 @@
     <ul class="platforms">
       {% for download in info[game]["downloads"] %}
       {% if download["platform"] == "windows" %}
-      <li class="platform windows"><a href="/downloads/{{ info[game]["order"] }}/{{ info[game]["id"] }}/windows"></a></li>
+      <li class="platform windows"><a href="/downloads/{{ info[game]["name"] }}/windows"></a></li>
       {% endif %}
       {% if download["platform"] == "mac" %}
-      <li class="platform mac"><a href="/downloads/{{ info[game]["order"] }}/{{ info[game]["id"] }}/mac"></a></li>
+      <li class="platform mac"><a href="/downloads/{{ info[game]["name"] }}/mac"></a></li>
       {% endif %}
       {% if download["platform"] == "linux" %}
-      <li class="platform linux"><a href="/downloads/{{ info[game]["order"] }}/{{ info[game]["id"] }}/linux"></a></li>
+      <li class="platform linux"><a href="/downloads/{{ info[game]["name"] }}/linux"></a></li>
       {% endif %}
       {% endfor %}
     </ul>
-    <img class='icon' src="/static/icons/{{ icons[game] }}">
-    {% if game in steam_info %}
-    {% if steam_info[game]["screens"]|length > 0 %}
-    <img class='screen' src="/static/screens/{{ steam_info[game]["screens"][0]["screens"] }}">
+
+    {% if 'icon' in info[game] %}
+    <img class='icon' src="/static/icons/{{ info[game]['icon'] }}">
+    {% else %}
+    <img class='icon' src="/static/icons/default.png">
+    {% endif %}
+
+    {% if 'screens' in info[game] %}
+    {% if info[game]["screens"]|length > 0 %}
+    <img class='screen' src="/static/screens/{{ info[game]["screens"][0]["screens"] }}">
     {% endif %}
     {% endif %}
     <div class="description">
-      {% if game in steam_info %}
-      {{ steam_info[game]["description"] | safe }}
+      {% if 'description' in info[game] %}
+      {{ info[game]["description"] | safe }}
       {% else %}
       No information known.
       {% endif %}
     </div>
     <div class='screenshot_track'>
       <ul class='screenshots'>
-        {% if game in steam_info %}
-        {% for screen in steam_info[game]["screens"] %}
+        {% if 'screens' in info[game] %}
+        {% for screen in info[game]["screens"] %}
         <li>
           <img class='screen' src="/static/thumbs/{{ screen["thumb"] }}">
         </li>
@@ -42,8 +48,8 @@
       </ul>
     </div>
     <ul class="tags">
-      {% if game in steam_info %}
-      {% for tag in steam_info[game]["tags"] %}
+      {% if 'tags' in info[game] %}
+      {% for tag in info[game]["tags"] %}
       <li class="tag"><a href="/tags/{{ tag }}">{{ tag }}</a></li>
       {% endfor %}
       {% endif %}
