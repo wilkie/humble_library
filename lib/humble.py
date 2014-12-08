@@ -25,8 +25,8 @@ else:
   except ImportError:
     from yaml import Loader, Dumper
   config = load(open("config/config.yml", "r"))
-  username = config["humblebundle"]["username"]
-  password = config["humblebundle"]["password"]
+  username = config["humblebundle"][0]["username"]
+  password = config["humblebundle"][0]["password"]
 
 print("Logging in as %s" % (username))
 client.login(username, password)

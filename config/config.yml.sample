@@ -1,9 +1,6 @@
 humblebundle:
-  username: blah@example.com
-  password: mypassword
-itch:
-  username: blah@example.com
-  password: mypassword
+  - username: blah@example.com
+    password: mypassword
 gog:
-  username: blah@example.com
-  password: mypassword
+  - username: blah@example.com
+    password: mypassword

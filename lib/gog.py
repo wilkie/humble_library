@@ -45,8 +45,8 @@ class GOG:
         from yaml import Loader, Dumper
       config = load(open("config/config.yml", "r"))
       if "gog" in config:
-        self.username = config["gog"]["username"]
-        self.password = config["gog"]["password"]
+        self.username = config["gog"][0]["username"]
+        self.password = config["gog"][0]["password"]
       else:
         print("Error: no username and password given for gog.com")
         exit(-1)
@@ -270,7 +270,11 @@ class GOG:
       })
 
     # Pull description
-    hash["description"] = soup.find('div', class_='description__text', attrs={"ng-show": "showAll"}).get_text().strip()
+    description = soup.find('div', class_='description__text', attrs={"ng-show": "showAll"})
+    if description is None:
+      description = soup.find('div', class_='description__text')
+
+    hash["description"] = description.get_text().strip()
 
     # Pull tags
     tags = soup.find('div', class_='product-details__data').find_all('a', class_='un')
