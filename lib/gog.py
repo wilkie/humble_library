@@ -45,8 +45,18 @@ class GOG:
         from yaml import Loader, Dumper
       config = load(open("config/config.yml", "r"))
       if "gog" in config:
-        self.username = config["gog"][0]["username"]
-        self.password = config["gog"][0]["password"]
+        id = 0
+        if not username is None:
+          for account = config["gog"]:
+            id += 1
+            if account["username"] == username:
+              break
+
+          if id >= len(config["gog"]):
+            id = 0
+
+        self.username = config["gog"][id]["username"]
+        self.password = config["gog"][id]["password"]
       else:
         print("Error: no username and password given for gog.com")
         exit(-1)
