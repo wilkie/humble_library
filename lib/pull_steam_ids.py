@@ -1,3 +1,17 @@
+# Patch HTTP for incomplete reads (because that is a thing, apparently)
+import http.client
+
+def patch_http_response_read(func):
+  def inner(*args):
+    try:
+      return func(*args)
+    except(httplib.IncompleteRead, e):
+      return e.partial
+
+  return inner
+
+http.client.HTTPResponse.read = patch_http_response_read(http.client.HTTPResponse.read)
+
 import json
 import urllib.request
 import urllib.parse

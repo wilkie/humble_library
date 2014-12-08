@@ -28,9 +28,10 @@ class GOG:
 
   def load(self):
     # Load games
-    self.gog_info_by_title = json.load(open("data/gog_list.json"))
-    self.games = list(self.gog_info_by_title.keys())
-    self.games.sort()
+    if os.path.exists("data/gog_list.json"):
+      self.gog_info_by_title = json.load(open("data/gog_list.json"))
+      self.games = list(self.gog_info_by_title.keys())
+      self.games.sort()
 
   def readConfig(self, username=None, password=None):
     if len(sys.argv) >= 3:
@@ -47,7 +48,7 @@ class GOG:
       if "gog" in config:
         id = 0
         if not username is None:
-          for account = config["gog"]:
+          for account in config["gog"]:
             id += 1
             if account["username"] == username:
               break
@@ -128,7 +129,12 @@ class GOG:
     for game in gog_games:
       game_info = self.pullGameInfo(game)
       self.gog_info_by_title[game_info["name"]] = game_info
-      print("Retrieved game %s" % (game_info["name"]))
+      try:
+        print("Retrieved game %s" % (game_info["name"]))
+      except:
+        # Argh. Sometimes it hates the encoding when it tries to print on
+        # some terminals. Freaking python.
+        print("Retrieved game %s" % (game_info["name"].encode('ascii', 'ignore').decode('ascii')))
 
   def writeList(self):
     o = open("data/gog_list.json", "w+")
